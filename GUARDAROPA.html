@@ -1,0 +1,1275 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY OUTFIT | Mi guardarropa digital</title>
+
+<style>
+:root {
+  --fondo: #f8f4ef;
+  --blanco: #ffffff;
+  --rosa: #dba6a9;
+  --rosa-claro: #f3dddd;
+  --negro: #292727;
+  --gris: #77716e;
+  --borde: #e9ded7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background: var(--fondo);
+  color: var(--negro);
+}
+
+header {
+  background: var(--blanco);
+  padding: 17px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 3px 15px #00000010;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--negro);
+}
+
+.logo span {
+  color: #c5848a;
+}
+
+nav {
+  display: flex;
+  gap: 17px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--negro);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #c5848a;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 600;
+  transition: .2s;
+}
+
+button:hover {
+  opacity: .85;
+  transform: translateY(-1px);
+}
+
+.hero {
+  min-height: 400px;
+  background:
+    linear-gradient(90deg, #292727bd, #29272718),
+    url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=85');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 50px 9%;
+  color: white;
+}
+
+.hero-content {
+  max-width: 520px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 65px);
+  letter-spacing: 4px;
+  line-height: 1.1;
+}
+
+.hero h1 span {
+  color: #f1c5c5;
+}
+
+.hero p {
+  line-height: 1.8;
+  margin: 20px 0;
+}
+
+.btn-main {
+  background: var(--rosa);
+  border: none;
+  color: white;
+  padding: 14px 25px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+section {
+  padding: 45px 6%;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 27px;
+}
+
+.section-title h2 {
+  font-size: 28px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.section-title p {
+  color: var(--gris);
+  font-size: 14px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.stat {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid var(--borde);
+}
+
+.stat strong {
+  display: block;
+  font-size: 27px;
+  color: #bf8589;
+}
+
+.stat span {
+  font-size: 13px;
+  color: var(--gris);
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.categories button {
+  background: white;
+  border: 1px solid var(--borde);
+  padding: 10px 17px;
+  border-radius: 25px;
+  color: var(--negro);
+}
+
+.categories button.active,
+.categories button:hover {
+  background: var(--rosa);
+  color: white;
+  border-color: var(--rosa);
+}
+
+.search {
+  display: block;
+  width: min(420px, 100%);
+  padding: 13px 17px;
+  border: 1px solid var(--borde);
+  border-radius: 25px;
+  margin: 0 auto 28px;
+  outline-color: var(--rosa);
+}
+
+.wardrobe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  box-shadow: 0 3px 12px #00000008;
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 22px #00000012;
+}
+
+.card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  background: var(--rosa-claro);
+}
+
+.card-content {
+  padding: 14px;
+}
+
+.card-content h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.card-content small {
+  color: #bc8589;
+  font-weight: bold;
+}
+
+.card-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 13px;
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 9px 5px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  background: var(--rosa-claro);
+  color: var(--negro);
+}
+
+.card-actions .favorite {
+  background: #f9e6e6;
+  color: #bd555f;
+}
+
+.card-actions .delete {
+  background: #eee;
+}
+
+.card-actions .edit {
+  background: #e8e1dc;
+}
+
+.panel {
+  background: white;
+  max-width: 850px;
+  margin: auto;
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid var(--borde);
+}
+
+.panel h3 {
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 12px;
+  border: 1px solid var(--borde);
+  border-radius: 7px;
+  outline-color: var(--rosa);
+  background: white;
+  width: 100%;
+}
+
+.full {
+  grid-column: 1/-1;
+}
+
+.preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: none;
+  margin-top: 10px;
+  border: 2px solid var(--rosa-claro);
+}
+
+.btn-save {
+  background: var(--rosa);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 13px 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btn-cancel {
+  display: none;
+  margin-top: 10px;
+  width: 100%;
+  background: #eee;
+  border: none;
+  padding: 11px;
+  border-radius: 7px;
+}
+
+/* CREADOR DE OUTFITS */
+
+.builder {
+  max-width: 850px;
+  margin: auto;
+  background: white;
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid var(--borde);
+}
+
+.builder select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--borde);
+  border-radius: 7px;
+  margin: 10px 0;
+}
+
+.selected-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.selected-items label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px;
+  background: var(--rosa-claro);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.saved-outfits {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.outfit-card {
+  background: var(--fondo);
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+}
+
+.outfit-card h3 {
+  color: #ae7479;
+  margin-bottom: 10px;
+}
+
+.outfit-card img {
+  width: 65px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 3px;
+}
+
+/* FAVORITOS */
+
+.favorite-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 18px;
+}
+
+/* PLAN SEMANAL */
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.day {
+  background: white;
+  border: 1px solid var(--borde);
+  padding: 18px;
+  border-radius: 11px;
+}
+
+.day h3 {
+  color: #b77b80;
+  margin-bottom: 12px;
+}
+
+.day select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: white;
+}
+
+.day p {
+  color: var(--gris);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.empty {
+  grid-column: 1/-1;
+  padding: 35px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+  color: var(--gris);
+}
+
+footer {
+  text-align: center;
+  background: #292727;
+  color: white;
+  padding: 30px;
+}
+
+footer strong {
+  color: #e7b6b8;
+}
+
+footer p {
+  font-size: 13px;
+  margin-top: 9px;
+}
+
+@media(max-width:650px) {
+  header {
+    flex-direction: column;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 350px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stat {
+    padding: 12px 5px;
+  }
+
+  .stat strong {
+    font-size: 21px;
+  }
+
+  .stat span {
+    font-size: 10px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .wardrobe-grid,
+  .favorite-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .card img {
+    height: 155px;
+  }
+
+  .card-content {
+    padding: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">MY <span>OUTFIT</span> ♡</div>
+
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#guardarropa">Guardarropa</a>
+    <a href="#registrar">Registrar</a>
+    <a href="#crear">Crear outfit</a>
+    <a href="#favoritos">Favoritos</a>
+    <a href="#semana">Mi semana</a>
+  </nav>
+</header>
+
+<!-- INICIO -->
+
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <h1>MY <span>OUTFIT</span></h1>
+    <h2>Tu estilo, tu esencia.</h2>
+    <p>
+      Organiza tu guardarropa, crea combinaciones increíbles
+      y planifica tus looks favoritos para cada día.
+      ¡La moda comienza contigo!
+    </p>
+    <button class="btn-main"
+      onclick="document.getElementById('guardarropa').scrollIntoView({behavior:'smooth'})">
+      EXPLORAR MI GUARDARROPA →
+    </button>
+  </div>
+</section>
+
+<!-- ESTADÍSTICAS -->
+
+<section>
+  <div class="stats">
+    <div class="stat">
+      <strong id="total-prendas">0</strong>
+      <span>Mis prendas</span>
+    </div>
+    <div class="stat">
+      <strong id="total-outfits">0</strong>
+      <span>Mis outfits</span>
+    </div>
+    <div class="stat">
+      <strong id="total-favoritos">0</strong>
+      <span>Favoritos</span>
+    </div>
+  </div>
+</section>
+
+<!-- GUARDARROPA -->
+
+<section id="guardarropa">
+  <div class="section-title">
+    <h2>MI GUARDARROPA</h2>
+    <p>Todas tus prendas organizadas en un solo lugar.</p>
+  </div>
+
+  <div class="categories" id="categories"></div>
+
+  <input class="search" id="search"
+    placeholder="🔍 Buscar una prenda..."
+    oninput="renderClothes()">
+
+  <div class="wardrobe-grid" id="wardrobe"></div>
+</section>
+
+<!-- REGISTRAR PRENDAS -->
+
+<section id="registrar">
+  <div class="section-title">
+    <h2>AGREGAR NUEVA PRENDA</h2>
+    <p>Registra tus prendas y agrégalas a tu guardarropa digital.</p>
+  </div>
+
+  <div class="panel">
+    <h3>♡ Datos de tu prenda</h3>
+
+    <form id="clothing-form">
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Nombre de la prenda</label>
+          <input id="clothing-name" required
+            placeholder="Ejemplo: Blusa blanca">
+        </div>
+
+        <div class="field">
+          <label>Categoría</label>
+          <select id="clothing-category" required>
+            <option value="">Seleccionar categoría</option>
+            <option>Blusas</option>
+            <option>Pantalones</option>
+            <option>Vestidos</option>
+            <option>Faldas</option>
+            <option>Zapatos</option>
+            <option>Accesorios</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Color</label>
+          <input id="clothing-color" placeholder="Ejemplo: Beige">
+        </div>
+
+        <div class="field">
+          <label>Descripción</label>
+          <input id="clothing-description"
+            placeholder="Ejemplo: Casual y elegante">
+        </div>
+
+        <div class="field full">
+          <label>Fotografía de la prenda</label>
+          <input type="file" id="clothing-image"
+            accept="image/*" required>
+          <img id="preview" class="preview" alt="Vista previa">
+        </div>
+
+      </div>
+
+      <button class="btn-save" type="submit" id="save-button">
+        + REGISTRAR PRENDA
+      </button>
+
+      <button class="btn-cancel" type="button" id="cancel-edit"
+        onclick="cancelEdit()">
+        CANCELAR EDICIÓN
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- CREAR COMBINACIONES -->
+
+<section id="crear">
+  <div class="section-title">
+    <h2>CREA TU OUTFIT</h2>
+    <p>Combina tus prendas y crea tu propio estilo.</p>
+  </div>
+
+  <div class="builder">
+    <h3>♡ Diseña una combinación</h3>
+
+    <div class="field">
+      <label>Nombre de tu outfit</label>
+      <input id="outfit-name" placeholder="Ejemplo: Look casual">
+    </div>
+
+    <div class="field" style="margin-top:15px">
+      <label>Selecciona las prendas que deseas combinar:</label>
+      <select id="outfit-category" onchange="showOptions()">
+        <option value="">Seleccionar categoría</option>
+        <option>Blusas</option>
+        <option>Pantalones</option>
+        <option>Vestidos</option>
+        <option>Faldas</option>
+        <option>Zapatos</option>
+        <option>Accesorios</option>
+      </select>
+    </div>
+
+    <div class="selected-items" id="options"></div>
+
+    <h4>Prendas seleccionadas:</h4>
+    <div id="selection-summary" class="selected-items">
+      <span style="color:#888">Todavía no has seleccionado prendas.</span>
+    </div>
+
+    <button class="btn-save" onclick="saveOutfit()">
+      ✨ GUARDAR MI OUTFIT
+    </button>
+
+    <h3 style="margin-top:35px">MIS COMBINACIONES</h3>
+    <div class="saved-outfits" id="outfits"></div>
+  </div>
+</section>
+
+<!-- FAVORITOS -->
+
+<section id="favoritos">
+  <div class="section-title">
+    <h2>♡ MIS FAVORITOS</h2>
+    <p>Las prendas que más te gustan.</p>
+  </div>
+
+  <div class="favorite-grid" id="favorites"></div>
+</section>
+
+<!-- PLAN SEMANAL -->
+
+<section id="semana">
+  <div class="section-title">
+    <h2>MI PLAN SEMANAL</h2>
+    <p>Organiza tus outfits para cada día de la semana.</p>
+  </div>
+
+  <div class="week" id="week"></div>
+</section>
+
+<footer>
+  <h2>MY <strong>OUTFIT</strong> ♡</h2>
+  <p>Organiza tu ropa, crea tu estilo y viste con confianza.</p>
+  <p>© 2026 MY OUTFIT - Mi guardarropa digital.</p>
+</footer>
+
+<script>
+
+// FUNCIONES PARA GUARDAR INFORMACIÓN
+
+function loadData(key, fallback) {
+  try {
+    const data = JSON.parse(localStorage.getItem(key));
+    return data === null ? fallback : data;
+  } catch {
+    return fallback;
+  }
+}
+
+let clothes = loadData("myOutfitClothes", [
+  {
+    id: 1,
+    name: "Blusa blanca",
+    category: "Blusas",
+    color: "Blanco",
+    description: "Blusa casual para cualquier ocasión.",
+    image: "https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=500"
+  },
+  {
+    id: 2,
+    name: "Pantalón beige",
+    category: "Pantalones",
+    color: "Beige",
+    description: "Pantalón de estilo moderno.",
+    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500"
+  },
+  {
+    id: 3,
+    name: "Vestido elegante",
+    category: "Vestidos",
+    color: "Negro",
+    description: "Vestido para ocasiones especiales.",
+    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500"
+  },
+  {
+    id: 4,
+    name: "Falda casual",
+    category: "Faldas",
+    color: "Negro",
+    description: "Falda para un look moderno.",
+    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+  },
+  {
+    id: 5,
+    name: "Zapatos urbanos",
+    category: "Zapatos",
+    color: "Blanco",
+    description: "Calzado cómodo para el día a día.",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+  },
+  {
+    id: 6,
+    name: "Bolso elegante",
+    category: "Accesorios",
+    color: "Marrón",
+    description: "Accesorio para completar tu outfit.",
+    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500"
+  }
+]);
+
+let outfits = loadData("myOutfitCombinations", []);
+let favorites = loadData("myOutfitFavorites", []);
+let weekly = loadData("myOutfitWeek", {});
+let currentCategory = "Todas";
+let selectedItems = [];
+let editingId = null;
+let uploadedImage = "";
+
+// GUARDAR CAMBIOS
+
+function persist() {
+  try {
+    localStorage.setItem("myOutfitClothes", JSON.stringify(clothes));
+    localStorage.setItem("myOutfitCombinations", JSON.stringify(outfits));
+    localStorage.setItem("myOutfitFavorites", JSON.stringify(favorites));
+    localStorage.setItem("myOutfitWeek", JSON.stringify(weekly));
+  } catch (error) {
+    alert("No se pudo guardar. La fotografía puede ser demasiado grande.");
+  }
+}
+
+// ESCAPAR TEXTO PARA MOSTRARLO EN HTML
+
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+// CATEGORÍAS
+
+const categoryList = [
+  "Todas", "Blusas", "Pantalones", "Vestidos",
+  "Faldas", "Zapatos", "Accesorios"
+];
+
+function createCategories() {
+  document.getElementById("categories").innerHTML =
+    categoryList.map(category => `
+      <button class="${currentCategory === category ? "active" : ""}"
+        onclick="setCategory('${category}')">
+        ${category}
+      </button>
+    `).join("");
+}
+
+function setCategory(category) {
+  currentCategory = category;
+  createCategories();
+  renderClothes();
+}
+
+// MOSTRAR PRENDAS
+
+function clothingCard(item) {
+  const isFavorite = favorites.includes(item.id);
+
+  return `
+    <article class="card">
+      <img src="${safe(item.image)}" alt="${safe(item.name)}"
+        onerror="this.src='https://placehold.co/500x400/f3dddd/292727?text=MY+OUTFIT'">
+
+      <div class="card-content">
+        <small>${safe(item.category)}</small>
+        <h3>${safe(item.name)}</h3>
+        <p style="font-size:12px;color:#777;margin-top:5px">
+          ${safe(item.color || "")}
+        </p>
+        <p style="font-size:12px;margin-top:5px">
+          ${safe(item.description || "")}
+        </p>
+
+        <div class="card-actions">
+          <button class="favorite"
+            onclick="toggleFavorite(${item.id})">
+            ${isFavorite ? "♥" : "♡"}
+          </button>
+          <button class="edit"
+            onclick="editClothing(${item.id})">Editar</button>
+          <button class="delete"
+            onclick="deleteClothing(${item.id})">Eliminar</button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderClothes() {
+  const search = document.getElementById("search").value.toLowerCase();
+
+  const filtered = clothes.filter(item => {
+    const categoryMatch =
+      currentCategory === "Todas" || item.category === currentCategory;
+
+    const searchMatch =
+      item.name.toLowerCase().includes(search) ||
+      item.category.toLowerCase().includes(search);
+
+    return categoryMatch && searchMatch;
+  });
+
+  document.getElementById("wardrobe").innerHTML =
+    filtered.length
+      ? filtered.map(clothingCard).join("")
+      : '<div class="empty">No hay prendas en esta categoría.</div>';
+
+  updateStats();
+}
+
+// REGISTRAR Y EDITAR
+
+document.getElementById("clothing-image").addEventListener("change", function() {
+  const file = this.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Selecciona un archivo de imagen válido.");
+    this.value = "";
+    return;
+  }
+
+  if (file.size > 3 * 1024 * 1024) {
+    alert("La imagen debe pesar menos de 3 MB.");
+    this.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    uploadedImage = event.target.result;
+    const preview = document.getElementById("preview");
+    preview.src = uploadedImage;
+    preview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+});
+
+document.getElementById("clothing-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("clothing-name").value.trim();
+  const category = document.getElementById("clothing-category").value;
+  const color = document.getElementById("clothing-color").value.trim();
+  const description = document.getElementById("clothing-description").value.trim();
+
+  const old = clothes.find(item => item.id === editingId);
+  const image = uploadedImage || old?.image;
+
+  if (!image) {
+    alert("Debes seleccionar una fotografía.");
+    return;
+  }
+
+  const item = {
+    id: editingId || Date.now(),
+    name,
+    category,
+    color,
+    description,
+    image
+  };
+
+  if (editingId) {
+    clothes = clothes.map(p => p.id === editingId ? item : p);
+  } else {
+    clothes.push(item);
+  }
+
+  persist();
+  this.reset();
+
+  uploadedImage = "";
+  editingId = null;
+
+  document.getElementById("preview").style.display = "none";
+  document.getElementById("save-button").textContent = "+ REGISTRAR PRENDA";
+  document.getElementById("cancel-edit").style.display = "none";
+
+  renderClothes();
+  renderFavorites();
+  showOptions();
+  renderWeek();
+
+  alert("¡Prenda guardada correctamente!");
+});
+
+function editClothing(id) {
+  const item = clothes.find(p => p.id === id);
+  if (!item) return;
+
+  editingId = id;
+  uploadedImage = item.image;
+
+  document.getElementById("clothing-name").value = item.name;
+  document.getElementById("clothing-category").value = item.category;
+  document.getElementById("clothing-color").value = item.color;
+  document.getElementById("clothing-description").value = item.description;
+
+  document.getElementById("preview").src = item.image;
+  document.getElementById("preview").style.display = "block";
+
+  document.getElementById("save-button").textContent = "GUARDAR CAMBIOS";
+  document.getElementById("cancel-edit").style.display = "block";
+
+  document.getElementById("registrar").scrollIntoView({behavior:"smooth"});
+}
+
+function cancelEdit() {
+  editingId = null;
+  uploadedImage = "";
+
+  document.getElementById("clothing-form").reset();
+  document.getElementById("preview").style.display = "none";
+  document.getElementById("save-button").textContent = "+ REGISTRAR PRENDA";
+  document.getElementById("cancel-edit").style.display = "none";
+}
+
+function deleteClothing(id) {
+  if (!confirm("¿Deseas eliminar esta prenda?")) return;
+
+  clothes = clothes.filter(p => p.id !== id);
+  favorites = favorites.filter(f => f !== id);
+
+  outfits = outfits.map(o => ({
+    ...o,
+    items: o.items.filter(i => i !== id)
+  }));
+
+  Object.keys(weekly).forEach(day => {
+    if (!outfits.some(o => o.id === weekly[day])) {
+      delete weekly[day];
+    }
+  });
+
+  if (editingId === id) cancelEdit();
+
+  persist();
+  renderClothes();
+  renderFavorites();
+  renderOutfits();
+  renderWeek();
+  showOptions();
+}
+
+// FAVORITOS
+
+function toggleFavorite(id) {
+  if (favorites.includes(id)) {
+    favorites = favorites.filter(f => f !== id);
+  } else {
+    favorites.push(id);
+  }
+
+  persist();
+  renderClothes();
+  renderFavorites();
+}
+
+function renderFavorites() {
+  const selected = clothes.filter(p => favorites.includes(p.id));
+
+  document.getElementById("favorites").innerHTML =
+    selected.length
+      ? selected.map(clothingCard).join("")
+      : '<div class="empty">♡ Todavía no tienes prendas favoritas.</div>';
+
+  updateStats();
+}
+
+// CREAR OUTFITS
+
+function showOptions() {
+  const category = document.getElementById("outfit-category").value;
+  const container = document.getElementById("options");
+
+  const available = clothes.filter(p => p.category === category);
+
+  if (!category) {
+    container.innerHTML = "";
+    return;
+  }
+
+  container.innerHTML = available.length
+    ? available.map(item => `
+      <label>
+        <input type="checkbox" value="${item.id}"
+          ${selectedItems.includes(item.id) ? "checked" : ""}
+          onchange="updateSelection()">
+        ${safe(item.name)}
+      </label>
+    `).join("")
+    : "<p>No tienes prendas registradas en esta categoría.</p>";
+
+  updateSelection();
+}
+
+function updateSelection() {
+  selectedItems = Array.from(
+    document.querySelectorAll("#options input:checked")
+  ).map(input => Number(input.value));
+
+  const container = document.getElementById("selection-summary");
+
+  if (!selectedItems.length) {
+    container.innerHTML = "<span style='color:#888'>Selecciona tus prendas.</span>";
+    return;
+  }
+
+  container.innerHTML = selectedItems.map(id => {
+    const item = clothes.find(p => p.id === id);
+    return item ? `
+      <span style="background:#f3dddd;padding:8px;border-radius:7px">
+        ${safe(item.name)}
+      </span>` : "";
+  }).join("");
+}
+
+function saveOutfit() {
+  const name = document.getElementById("outfit-name").value.trim();
+
+  if (!name) {
+    alert("Escribe un nombre para tu outfit.");
+    return;
+  }
+
+  if (selectedItems.length === 0) {
+    alert("Selecciona al menos una prenda.");
+    return;
+  }
+
+  const outfit = {
+    id: Date.now(),
+    name,
+    items: [...selectedItems]
+  };
+
+  outfits.push(outfit);
+
+  selectedItems = [];
+  document.getElementById("outfit-name").value = "";
+  document.getElementById("outfit-category").value = "";
+  document.getElementById("options").innerHTML = "";
+  document.getElementById("selection-summary").innerHTML =
+    "Selecciona nuevas prendas.";
+
+  persist();
+  renderOutfits();
+  renderWeek();
+  updateStats();
+
+  alert("¡Tu outfit se guardó correctamente!");
+}
+
+function renderOutfits() {
+  const container = document.getElementById("outfits");
+
+  container.innerHTML = outfits.length
+    ? outfits.map(outfit => `
+      <div class="outfit-card">
+        <h3>♡ ${safe(outfit.name)}</h3>
+
+        ${outfit.items.map(id => {
+          const item = clothes.find(p => p.id === id);
+          return item ? `
+            <img src="${safe(item.image)}" title="${safe(item.name)}"
+              alt="${safe(item.name)}">
+          ` : "";
+        }).join("")}
+
+        <p style="font-size:12px;margin:10px 0">
+          ${outfit.items.map(id => {
+            const item = clothes.find(p => p.id === id);
+            return item ? safe(item.name) : "";
+          }).filter(Boolean).join(", ")}
+        </p>
+
+        <button class="btn-save"
+          onclick="deleteOutfit(${outfit.id})">Eliminar outfit</button>
+      </div>
+    `).join("")
+    : '<div class="empty">Aún no has creado combinaciones.</div>';
+}
+
+function deleteOutfit(id) {
+  if (!confirm("¿Eliminar esta combinación?")) return;
+
+  outfits = outfits.filter(o => o.id !== id);
+
+  Object.keys(weekly).forEach(day => {
+    if (weekly[day] === id) delete weekly[day];
+  });
+
+  persist();
+  renderOutfits();
+  renderWeek();
+  updateStats();
+}
+
+// PLAN SEMANAL
+
+const days = [
+  "Lunes", "Martes", "Miércoles", "Jueves",
+  "Viernes", "Sábado", "Domingo"
+];
+
+function renderWeek() {
+  const container = document.getElementById("week");
+
+  container.innerHTML = days.map(day => `
+    <div class="day">
+      <h3>♡ ${day}</h3>
+
+      <select onchange="setDay('${day}', this.value)">
+        <option value="">Elegir outfit</option>
+
+        ${outfits.map(outfit => `
+          <option value="${outfit.id}"
+            ${String(weekly[day] || "") === String(outfit.id) ? "selected" : ""}>
+            ${safe(outfit.name)}
+          </option>
+        `).join("")}
+      </select>
+
+      <p>${weekly[day]
+        ? "Outfit planificado ✓"
+        : "Todavía no tienes un look."}</p>
+    </div>
+  `).join("");
+}
+
+function setDay(day, id) {
+  if (id) {
+    weekly[day] = Number(id);
+  } else {
+    delete weekly[day];
+  }
+
+  persist();
+  renderWeek();
+}
+
+// ESTADÍSTICAS
+
+function updateStats() {
+  document.getElementById("total-prendas").textContent = clothes.length;
+  document.getElementById("total-outfits").textContent = outfits.length;
+  document.getElementById("total-favoritos").textContent = favorites.length;
+}
+
+// INICIAR APLICACIÓN
+
+createCategories();
+renderClothes();
+renderFavorites();
+renderOutfits();
+renderWeek();
+updateStats();
+
+</script>
+</body>
+</html>
